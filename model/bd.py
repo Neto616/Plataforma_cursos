@@ -18,7 +18,22 @@ class MYSQL_CONNECTOR:
             database=self._db
         )
 
-    def query(self, query, *params):
+    def other_queries(self, query, *params):
+        connection = self._connection()
+        try:
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, params)
+            connection.commit()
+
+            return {"rows_affected": cursor.rowcount}
+        except mysql.connector.Error as err:
+            print(f"Error al conectar a la base de datos: {err}")
+        except Exception as err:
+            print(f"Ha ocurrido un error ❌-❌ {err}")
+        finally:
+            connection.close()
+
+    def select_queries(self, query, *params):
         connection = self._connection()
         try:
             cursor = connection.cursor(dictionary= True)
@@ -44,8 +59,8 @@ if __name__ == "__main__":
     dataBase = MYSQL_CONNECTOR(user, password, host, db)
     print(dataBase.__str__())
     try:
-        cPapu = dataBase.query("SELECT * from productos")
-        for e in cPapu:
+        pruebaDb = dataBase.select_queries("SELECT * from usuario")
+        for e in pruebaDb:
             print(e)
     except Exception as e:
         print(e)
