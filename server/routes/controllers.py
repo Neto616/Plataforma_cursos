@@ -48,6 +48,7 @@ async def crear_usuario(user_data: UserRegistrationRequest):
 @app.post("/iniciar-sesion")
 async def login(data: LoginInfo, response: Response):
     try:
+        print(data)
         dataBase = MYSQL_CONNECTOR(user, password, host, db)
         if not (len(data.contrasena) or len(data.correo)): return {"estatus": 0, "result": {
             "message": "No se admiten vacios en los campos",
