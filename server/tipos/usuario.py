@@ -14,9 +14,9 @@ class Usuario(BaseModel):
     
 class Estudiante(Usuario):
     curp: str
-    tipo: Literal[1] = 1
+    tipo: Literal["1"] = 1
     
 class Maestro(Usuario):
-    tipo: Literal[2] = 2
+    tipo: Literal["2"] = 2
 
 UserRegistrationRequest = Union[Estudiante, Maestro]
