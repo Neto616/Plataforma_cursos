@@ -243,10 +243,6 @@ body {
     border-radius: 16px;
   }
 
-  .auth-box h2 {
-    font-size: 1.7rem;
-  }
-
   .input-group input {
     padding: 0.9rem 1rem;
   }
@@ -311,4 +307,147 @@ select {
 
 .input-group.error label {
   color: #e53e3e;
+}
+
+/* Formulario de compra */
+.modal-overlay {
+  position: fixed;
+  top: 80px; /* deja espacio para la topbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.modal-split {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  max-height: 85vh;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.modal-left, .modal-right {
+  padding: 2rem;
+  width: 50%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 85vh;
+}
+
+.modal-right {
+  background: #f7fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-right h4 {
+  color: #2d3748;
+  margin-bottom: 1.4rem;
+}
+
+.modal-right p {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.modal-close {
+  position: absolute;
+  color: #333;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.modal-subtitle {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  color: #4a5568;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-top: 0.6rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+form input {
+  margin-top: 0.3rem;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #cbd5e0;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.cvv {
+  margin-top: 0.3rem;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #cbd5e0;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.form-row label {
+  margin-top: 0.6rem;
+}
+
+.form-row > div {
+  flex: 1;
+}
+
+form button {
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
