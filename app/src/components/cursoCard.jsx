@@ -1,16 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function CourseCard () {
+function CourseCard ({ titulo, imgName, descripcion, id }) {
+    const navigate = useNavigate();
     return (
     <div className="course-card">
-        <img src="https://placehold.co/300x180/E0E0E0/333333?text=Curso+1" alt="Curso de Programación" />
-        <h3>Programación Web con Python</h3>
-        <p>Aprende a crear aplicaciones web robustas y escalables.</p>
+        <img src={imgName} alt="Curso de Programación" onClick={()=> navigate(`/capitulos/${id}`)}/>
+        <h3>{titulo}</h3>
+        {/* <p>{descripcion}</p> */}
         <div className="course-meta">
             <span>★ 4.7</span>
             <span>(1200 alumnos)</span>
         </div>
             <button className="btn btn-card">Ver Curso</button>
+            <button className="btn btn-card" style={{ backgroundColor: "blue"}}>Comprar Certificado</button>
     </div>
     );
 }

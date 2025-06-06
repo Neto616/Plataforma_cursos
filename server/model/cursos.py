@@ -1,10 +1,11 @@
 from model.bd import MYSQL_CONNECTOR
 
 class Curso: 
-    def __init__(self, maestro, titulo, portada, capitulos = None):
+    def __init__(self, maestro, titulo, portada, id, capitulos = None):
         self.maestro = maestro
         self.titulo = titulo
         self.portada = portada
+        self.id = id
 
     def __str__(self):
         return f"Maestro: {self.maestro}\nTitulo: {self.maestro}\nCapitulos: {"\n".join(self.capitulos)}"
@@ -14,6 +15,7 @@ class Curso:
             "maestro": self.maestro,
             "titulo": self.titulo,
             "portada": self.portada,
+            "id": self.id
         }
 
 class Capitulos: 
@@ -45,7 +47,7 @@ class CursoService(MYSQL_CONNECTOR):
     def obtain_courses(self):
         consulta = f"select * from curso where estatus = 1"
         cursos = super().select_queries(consulta)
-        list_cursos = [Curso(x["maestro"], x["titulo"], x["portada"]).to_dict() for x in cursos]
+        list_cursos = [Curso(x["maestro"], x["titulo"], x["portada"], x["id"]).to_dict() for x in cursos]
         
         for i in list_cursos:
             i.__str__()

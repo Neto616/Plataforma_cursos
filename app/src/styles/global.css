@@ -5,7 +5,7 @@
 
 
 /* ========================= */
-/* 1. Global Styles (antes global.css) */
+/* 1. Global Styles */
 /* ========================= */
 * {
     box-sizing: border-box;
@@ -81,7 +81,7 @@ button:hover, .btn:hover {
 
 
 /* ========================= */
-/* 2. Auth Styles (antes auth.css) */
+/* 2. Auth Styles */
 /* ========================= */
 .auth-container {
     display: flex;
@@ -133,10 +133,9 @@ button:hover, .btn:hover {
 
 
 /* ========================= */
-/* 3. Home Styles (antes home.css) */
+/* 3. Home Styles */
 /* ========================= */
 
-/* Estilos para el encabezado principal */
 .main-header {
     background-color: #2c3e50;
     color: #fff;
@@ -266,12 +265,11 @@ button:hover, .btn:hover {
 }
 
 
-/* Sección de Cursos */
+/* Sección de Cursos en Home */
 .courses-section {
     padding: 60px 20px;
     max-width: 1200px;
     margin: 0 auto;
-    /* text-align: center; REMOVED FOR LEFT ALIGNMENT */
     background-color: #fff;
 }
 
@@ -279,21 +277,20 @@ button:hover, .btn:hover {
     font-size: 2.5rem;
     margin-bottom: 40px;
     color: #2c3e50;
-    text-align: left; /* Alineado a la izquierda para el título de la sección */
+    text-align: left;
 }
 
 .course-grid {
-    display: flex; /* CAMBIADO: Usar flexbox para el desplazamiento horizontal */
-    overflow-x: auto; /* Permite el desplazamiento horizontal si hay más cursos */
-    scroll-snap-type: x mandatory; /* Para un desplazamiento más suave entre elementos */
-    -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
-    gap: 30px; /* Espacio entre tarjetas de curso */
-    padding-bottom: 20px; /* Espacio para la barra de desplazamiento si aparece */
-    justify-content: flex-start; /* Alinea los cursos al inicio (izquierda) */
-    align-items: flex-start; /* Alinea los cursos en la parte superior */
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 30px;
+    padding-bottom: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-/* Ocultar la barra de desplazamiento para navegadores basados en Webkit */
 .course-grid::-webkit-scrollbar {
     height: 8px;
 }
@@ -314,21 +311,21 @@ button:hover, .btn:hover {
 
 
 .course-card {
-    flex: 0 0 300px; /* CAMBIADO: Asegura que la tarjeta no se encoja y tenga un ancho fijo */
-    scroll-snap-align: start; /* Alinea la tarjeta al inicio del scroll-snap */
+    flex: 0 0 300px;
+    scroll-snap-align: start;
     background-color: #fff;
-    border: 1px solid #e0e0e0; /* Borde visible del recuadro */
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     overflow: hidden;
     text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Añadido border-color a la transición */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .course-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    border-color: #007bff; /* CAMBIADO: Borde de color en hover */
+    border-color: #007bff;
 }
 
 .course-card img {
@@ -381,6 +378,27 @@ button:hover, .btn:hover {
     text-decoration: none;
 }
 
+.course-card .course-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.course-card .course-link h3 {
+    color: #343a40;
+    margin: 15px 15px 10px;
+    transition: color 0.3s ease;
+}
+
+.course-card .course-link:hover h3 {
+    color: #007bff;
+    text-decoration: none; /* No subrayar al pasar el ratón para mantener limpio */
+}
+
+.course-card .course-link img {
+    border: none;
+}
+
 
 /* Pie de Página (Footer) */
 .main-footer {
@@ -414,7 +432,7 @@ button:hover, .btn:hover {
 }
 
 /* ======================================= */
-/* Media Queries para Responsividad Móvil */
+/* Media Queries para Home Page */
 /* ======================================= */
 
 @media (max-width: 768px) {
@@ -442,18 +460,18 @@ button:hover, .btn:hover {
 
     .courses-section h2 {
         font-size: 2rem;
-        text-align: center; /* Centrar en móvil */
+        text-align: center;
     }
 
     .course-grid {
-        flex-wrap: nowrap; /* Evita que los elementos se envuelvan */
-        overflow-x: auto; /* Mantiene el scroll horizontal */
+        flex-wrap: nowrap;
+        overflow-x: auto;
         justify-content: flex-start;
     }
 
     .course-card {
-        flex: 0 0 calc(90% - 20px); /* Ocupa casi todo el ancho con un margen en los lados */
-        margin: 0 10px; /* Margen para evitar que toque los bordes */
+        flex: 0 0 calc(90% - 20px);
+        margin: 0 10px;
     }
 
     .main-footer .footer-content {
@@ -462,5 +480,265 @@ button:hover, .btn:hover {
 
     .main-footer .footer-links {
         margin-top: 10px;
+    }
+}
+
+
+/* ========================================================================= */
+/* Nuevos Estilos para la Página de Detalles del Curso (course_detail.html) */
+/* ========================================================================= */
+
+.course-player-page {
+    background-color: #1a1a1a; /* Fondo oscuro similar a Udemy para la página del curso */
+    color: #fff;
+    padding: 0; /* Sin padding en la sección principal */
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex;
+    flex-direction: column; /* Contenido apilado verticalmente */
+    min-height: calc(100vh - 80px); /* Ajusta a la altura de la ventana menos el header y footer */
+}
+
+.course-player-container {
+    display: flex; /* Contenedor principal con flexbox para las dos columnas */
+    flex-grow: 1; /* Para que ocupe el espacio restante */
+    background-color: #000; /* Fondo negro para el reproductor */
+}
+
+/* Columna Izquierda: Reproductor de Video y Descripción */
+.video-player {
+    flex: 3; /* Ocupa 3 partes del espacio disponible */
+    background-color: #000; /* Fondo del reproductor de video */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box; /* Incluye padding en el tamaño */
+}
+
+.video-header {
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: left; /* Alineado a la izquierda */
+}
+
+.video-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.video-header .course-instructor {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.youtube-player-wrapper {
+    position: relative;
+    width: 100%;
+    /* Altura basada en una relación de aspecto 16:9 (altura = ancho * 9 / 16) */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.youtube-player-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Sin borde */
+}
+
+.course-description-area {
+    background-color: #1a1a1a; /* Fondo oscuro para la descripción debajo del video */
+    padding: 20px 0;
+    color: #f0f0f0;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.course-description-area h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.course-description-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.course-description-area .course-rating {
+    font-size: 0.9rem;
+    color: #f39c12;
+}
+
+
+/* Columna Derecha: Lista de Capítulos */
+.chapter-list-container {
+    flex: 1; /* Ocupa 1 parte del espacio disponible (más angosto) */
+    background-color: #2c3e50; /* Color oscuro para el sidebar de capítulos */
+    padding: 20px;
+    overflow-y: auto; /* Permite desplazamiento vertical si la lista es larga */
+    box-sizing: border-box;
+    min-width: 300px; /* Ancho mínimo para la lista de capítulos */
+    max-width: 400px; /* Ancho máximo para la lista de capítulos */
+    border-left: 1px solid #3d566e; /* Separador sutil */
+}
+
+.chapter-list-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #fff;
+    text-align: left;
+}
+
+.modules-list {
+    list-style: none;
+    padding: 0;
+}
+
+.module-item {
+    background-color: #34495e; /* Fondo del módulo */
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.module-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #46627f; /* Fondo más claro para el título del módulo */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #fff; /* Texto blanco para el título del módulo */
+}
+
+.module-title:hover {
+    background-color: #55718f;
+}
+
+.module-title h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.module-title .toggle-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease; /* Transición para el icono */
+}
+.module-title .toggle-icon.rotated {
+    transform: rotate(45deg); /* Gira el '+' a una 'x' o un '-' cuando está abierto */
+}
+
+
+.lesson-list {
+    list-style: none;
+    padding: 0;
+    display: block; /* Por defecto visible, JavaScript lo oculta */
+    background-color: #3a5067; /* Fondo para las lecciones del módulo */
+    border-top: 1px solid #4a637d; /* Borde superior para separar del título del módulo */
+}
+
+.lesson-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid #4a637d; /* Separador entre lecciones */
+    transition: background-color 0.2s ease;
+}
+
+.lesson-item:last-child {
+    border-bottom: none;
+}
+
+.lesson-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e0e0e0; /* Color de texto para las lecciones */
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.lesson-item a:hover {
+    background-color: #4a637d; /* Fondo en hover para lecciones */
+    color: #fff; /* Texto más blanco en hover */
+    text-decoration: none;
+}
+
+.lesson-number {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #007bff; /* Color para el número de lección */
+}
+
+.lesson-duration {
+    font-size: 0.85rem;
+    color: #bbb; /* Color más claro para la duración */
+}
+
+
+/* ======================================= */
+/* Media Queries para course_detail.html */
+/* ======================================= */
+
+@media (max-width: 992px) {
+    .course-player-container {
+        flex-direction: column; /* Apila las columnas en pantallas medianas y pequeñas */
+    }
+
+    .video-player {
+        flex: none; /* Elimina la proporción flex */
+        width: 100%; /* Ocupa todo el ancho */
+        padding: 15px; /* Ajusta padding */
+    }
+
+    .chapter-list-container {
+        flex: none; /* Elimina la proporción flex */
+        width: 100%; /* Ocupa todo el ancho */
+        max-width: none; /* Elimina ancho máximo */
+        min-width: unset; /* Elimina ancho mínimo */
+        border-left: none; /* Elimina borde lateral */
+        border-top: 1px solid #3d566e; /* Añade borde superior */
+        padding: 15px; /* Ajusta padding */
+    }
+
+    .video-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .course-description-area {
+        padding: 15px 0; /* Ajusta padding */
+    }
+
+    .course-description-area h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .video-player {
+        padding: 10px;
+    }
+    .video-header h1 {
+        font-size: 1.5rem;
+    }
+    .course-description-area h2 {
+        font-size: 1.5rem;
+    }
+    .module-title h3 {
+        font-size: 1rem;
+    }
+    .lesson-item a {
+        font-size: 0.9rem;
     }
 }

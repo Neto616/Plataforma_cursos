@@ -24,7 +24,7 @@ function Login() {
 
             if(!respuesta.estatus) return alert("Credenciales incorrectas");
             alert(respuesta.result.message);
-            navigate(`/${respuesta.result.tipo_usuario}/`);
+            navigate(`/`);
             return;
         } catch (error) {
             console.error("Ha sucedido un error: ", error);
