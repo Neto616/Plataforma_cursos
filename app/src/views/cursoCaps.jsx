@@ -1,21 +1,39 @@
+// Importación de React y hooks necesarios
 import React, { useEffect, useState } from "react";
+
+// Estilos globales para el componente
 import "../styles/global.css";
+
+// Hook para obtener la URL actual
 import { useLocation } from "react-router-dom";
 
 function CursoCaps() {
+  // Hook para acceder a la ruta actual (por ejemplo: /curso/1)
   const location = useLocation();
+
+  // Estado que guarda todos los capítulos del curso
   const [chapters, setChapters] = useState([]);
+
+  // Estado para la URL del video actualmente seleccionado
   const [videoUrl, setVideoUrl] = useState("");
+
+  // Estado para abrir o cerrar módulos (como un acordeón)
   const [modulosAbiertos, setModulosAbiertos] = useState({});
 
+  // Función que obtiene los capítulos desde el backend
   const getChapters = async () => {
     try {
+      // Hace una petición GET al backend usando la ruta actual
       const response = await fetch("http://localhost:8000" + location.pathname, {
         method: "GET",
         headers: { "Content-Type": "application/json" }
       });
-      const data = await response.json();
-      setChapters(data || []);
+
+      const data = await response.json(); // Parseo de la respuesta JSON
+
+      setChapters(data || []); // Guardar capítulos recibidos
+
+      // Si hay capítulos, se carga el primer video automáticamente
       if (data.length > 0) {
         setVideoUrl(embedUrl(data[0].url));
       }
@@ -24,10 +42,12 @@ function CursoCaps() {
     }
   };
 
+  // useEffect se ejecuta cuando el componente se monta o cambia la URL
   useEffect(() => {
     getChapters();
   }, [location.pathname]);
 
+  // Función que alterna si un módulo está abierto o cerrado
   const toggleLessons = (id) => {
     setModulosAbiertos((prev) => ({
       ...prev,
@@ -35,22 +55,30 @@ function CursoCaps() {
     }));
   };
 
+  // Carga un nuevo video al hacer clic en una lección
   const loadYoutubeVideo = (url) => {
     setVideoUrl(embedUrl(url));
   };
 
+  // Convierte una URL de YouTube a una URL embebida (embed)
   const embedUrl = (youtubeUrl) => {
+    // Extrae el ID del video con una expresión regular
     const match = youtubeUrl.match(/(?:\/|v=|be\/|embed\/)([a-zA-Z0-9_-]{11})/);
     return match ? `https://www.youtube.com/embed/${match[1]}` : "";
   };
 
+  // Renderizado del componente
   return (
     <section className="course-player-page">
       <div className="course-player-container">
+
+        {/* Sección del video principal */}
         <div className="video-player">
           <div className="video-header">
             <h1>Curso - Capítulo {chapters[0]?.capitulo}</h1>
           </div>
+
+          {/* Video de YouTube embebido */}
           <div className="youtube-player-wrapper">
             <iframe
               width="100%"
@@ -63,6 +91,8 @@ function CursoCaps() {
               allowFullScreen
             ></iframe>
           </div>
+
+          {/* Descripción del curso */}
           <div className="course-description-area">
             <h2>Descripción General</h2>
             <p>{chapters[0]?.descripcion}</p>
@@ -70,14 +100,19 @@ function CursoCaps() {
           </div>
         </div>
 
+        {/* Sección del listado de capítulos */}
         <div className="chapter-list-container">
           <h2>Contenido del Curso</h2>
           <div className="modules-list">
+
+            {/* Módulo con botón para abrir/cerrar lista de lecciones */}
             <div className="module-item">
               <div className="module-title" onClick={() => toggleLessons("mod1")}>
                 <h3>Capítulos</h3>
                 <span className="toggle-icon">{modulosAbiertos["mod1"] ? "−" : "+"}</span>
               </div>
+
+              {/* Lista de capítulos, si el módulo está abierto */}
               {modulosAbiertos["mod1"] && (
                 <ul className="lesson-list">
                   {chapters.map((chapter, index) => (
@@ -91,6 +126,7 @@ function CursoCaps() {
                 </ul>
               )}
             </div>
+
           </div>
         </div>
       </div>
@@ -98,4 +134,5 @@ function CursoCaps() {
   );
 }
 
+// Exportación del componente para usarlo en rutas
 export default CursoCaps;

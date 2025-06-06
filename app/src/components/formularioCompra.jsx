@@ -1,29 +1,34 @@
 import React, { useState } from "react";
-import "../styles/auth.css";
+import "../styles/auth.css"; // Estilos del formulario modal de compra
 
+// Componente FormularioCompra: muestra un modal para ingresar datos de tarjeta y comprar un certificado.
+// Recibe como props:
+// - onClose: función para cerrar el modal.
+// - courseTitle: nombre del curso que se está comprando.
 function FormularioCompra({ onClose, courseTitle }) {
+  // Estados para los campos del formulario
   const [tarjeta, setTarjeta] = useState("");
   const [vencimiento, setVencimiento] = useState("");
   const [cvv, setCvv] = useState("");
 
-  // Formatear número de tarjeta (xxxx xxxx xxxx xxxx)
+  // Manejador para formatear el número de tarjeta en tiempo real (XXXX XXXX XXXX XXXX)
   const handleTarjetaChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // Eliminar todo lo que no sea número
-    const formatted = value.match(/.{1,4}/g)?.join(" ") ?? "";
+    const value = e.target.value.replace(/\D/g, ""); // Elimina todo lo que no sea número
+    const formatted = value.match(/.{1,4}/g)?.join(" ") ?? ""; // Agrupa cada 4 dígitos
     setTarjeta(formatted);
   };
 
-  // Formatear vencimiento (MM/AA)
+  // Manejador para formatear la fecha de vencimiento (MM/AA)
   const handleVencimientoChange = (e) => {
     let value = e.target.value.replace(/\D/g, ""); // Solo números
     if (value.length >= 3) {
-      value = value.slice(0, 4); // máximo 4 dígitos
-      value = value.slice(0, 2) + "/" + value.slice(2);
+      value = value.slice(0, 4); // Máximo 4 dígitos
+      value = value.slice(0, 2) + "/" + value.slice(2); // Inserta el slash
     }
     setVencimiento(value);
   };
 
-  // Permitir borrar correctamente el slash
+  // Permite borrar el slash del campo de vencimiento al presionar Backspace
   const handleVencimientoKeyDown = (e) => {
     if (e.key === "Backspace") {
       const value = vencimiento;
@@ -34,36 +39,39 @@ function FormularioCompra({ onClose, courseTitle }) {
     }
   };
 
-  // Solo números para CVV
+  // Manejador para limitar el CVV a solo números y máximo 4 dígitos
   const handleCvvChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
-    setCvv(value.slice(0, 4)); // máximo 4 dígitos
+    setCvv(value.slice(0, 4));
   };
 
+  // Al enviar el formulario, muestra los datos por consola (simula una compra)
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Tarjeta:", tarjeta);
     console.log("Vencimiento:", vencimiento);
     console.log("CVV:", cvv);
-    // Aquí iría el procesamiento del pago
+    // Aquí iría el procesamiento del pago real
   };
 
   return (
     <div className="modal-overlay">
       <div className="modal-split modal-compra-container">
+        {/* Sección izquierda del modal: formulario */}
         <div className="modal-left">
-          <button className="modal-close" onClick={onClose}>
-            ×
-          </button>
+          {/* Botón para cerrar el modal */}
+          <button className="modal-close" onClick={onClose}>×</button>
 
+          {/* Título e información del curso */}
           <h3 className="modal-title">Comprar Certificado</h3>
           <p className="modal-subtitle">
-            Curso: <strong>{courseTitle}</strong>
-            <br />
+            Curso: <strong>{courseTitle}</strong><br />
             Completa tus datos para continuar.
           </p>
 
+          {/* Formulario de compra */}
           <form onSubmit={handleSubmit}>
+            {/* Campo para el número de tarjeta */}
             <label htmlFor="tarjeta">Número de tarjeta:</label>
             <input
               id="tarjeta"
@@ -76,6 +84,7 @@ function FormularioCompra({ onClose, courseTitle }) {
               required
             />
 
+            {/* Fila con vencimiento y CVV */}
             <div className="form-row">
               <div>
                 <label htmlFor="vencimiento">Vencimiento:</label>
@@ -105,10 +114,12 @@ function FormularioCompra({ onClose, courseTitle }) {
               </div>
             </div>
 
+            {/* Botón para enviar el formulario */}
             <button type="submit">Finalizar Compra</button>
           </form>
         </div>
 
+        {/* Sección derecha del modal: información adicional */}
         <div className="modal-right">
           <h4>¿Qué sucede luego del pago?</h4>
           <p>
