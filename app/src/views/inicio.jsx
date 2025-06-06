@@ -27,15 +27,15 @@ function Inicio() {
     }, [])
 
     return (
-    <>
-    <Header/>
-    <section className="hero-section">
-        <div className="hero-content">
-            <h1>Aprende nuevas habilidades en línea</h1>
-            <p>Conviértete en un experto con los mejores cursos impartidos por profesionales.</p>
-            {/* <a href="#" className="btn btn-hero">Explorar Cursos</a> */}
-        </div>
-    </section>
+        <>
+            <Header />
+            <section className="hero-section">
+                <div className="hero-content">
+                    <h1>Aprende nuevas habilidades en línea</h1>
+                    <p>Conviértete en un experto con los mejores cursos impartidos por profesionales.</p>
+                    {/* <a href="#" className="btn btn-hero">Explorar Cursos</a> */}
+                </div>
+            </section>
 
     <section className="courses-section">
         <h2>Cursos Populares</h2>
@@ -47,7 +47,7 @@ function Inicio() {
         </div>
     </section>
 
-    <Footer/>
+            <Footer />
         </>
     );
 }

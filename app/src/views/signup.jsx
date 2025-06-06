@@ -77,7 +77,7 @@ function SignUp(){
 
                 <button type="submit" className="btn">Registrarse</button>
                 <div className="links">
-                    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+                    <p>¿Ya tienes cuenta?<Link to="/iniciar-sesion">Inicia sesión aquí</Link></p>
                 </div>
             </form>
         </div>
