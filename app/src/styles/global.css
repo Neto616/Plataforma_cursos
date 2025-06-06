@@ -4,12 +4,9 @@
 /* ========================================================================= */
 
 
-<<<<<<< HEAD
 /* ========================= */
 /* 1. Global Styles */
 /* ========================= */
-=======
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +19,6 @@ body {
   background: #f8fafc;
 }
 
-<<<<<<< HEAD
 h1, h2, h3, h4 {
     color: #2c3e50;
     margin-bottom: 15px;
@@ -136,9 +132,6 @@ button:hover, .btn:hover {
 /* 3. Home Styles */
 /* ========================= */
 
-=======
-/* HEADER STYLES */
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
 .main-header {
   position: fixed;
   top: 0;
@@ -376,7 +369,6 @@ button:hover, .btn:hover {
   background: white;
 }
 
-<<<<<<< HEAD
 
 /* Sección de Cursos en Home */
 .courses-section {
@@ -439,72 +431,6 @@ button:hover, .btn:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     border-color: #007bff;
-=======
-/* COURSES SECTION */
-.courses-section {
-  padding: 5rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  animation: fadeIn 0.8s ease-out 0.3s both;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.courses-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: #2d3748;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-}
-
-.courses-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 2px;
-}
-
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-top: 4rem;
-}
-
-.course-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.1),
-    0 1px 0 rgba(255, 255, 255, 0.8) inset;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  position: relative;
-  animation: slideInUp 0.6s ease-out;
-}
-
-.course-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.15),
-    0 1px 0 rgba(255, 255, 255, 0.8) inset;
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
 }
 
 .course-card img {
@@ -566,7 +492,6 @@ button:hover, .btn:hover {
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
-<<<<<<< HEAD
 .course-card .course-link {
     display: block;
     text-decoration: none;
@@ -590,9 +515,6 @@ button:hover, .btn:hover {
 
 
 /* Pie de Página (Footer) */
-=======
-/* FOOTER STYLES */
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
 .main-footer {
   background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
   color: white;
@@ -659,14 +581,10 @@ button:hover, .btn:hover {
   transform: translateY(-1px);
 }
 
-<<<<<<< HEAD
 /* ======================================= */
 /* Media Queries para Home Page */
 /* ======================================= */
 
-=======
-/* RESPONSIVE DESIGN */
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
@@ -692,7 +610,6 @@ button:hover, .btn:hover {
     padding: 3rem 1rem;
   }
 
-<<<<<<< HEAD
     .courses-section h2 {
         font-size: 2rem;
         text-align: center;
@@ -708,29 +625,12 @@ button:hover, .btn:hover {
         flex: 0 0 calc(90% - 20px);
         margin: 0 10px;
     }
-=======
-  .course-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .courses-section h2 {
-    font-size: 2rem;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
 
   .footer-links {
     gap: 1.5rem;
   }
 }
 
-<<<<<<< HEAD
 
 /* ========================================================================= */
 /* Nuevos Estilos para la Página de Detalles del Curso (course_detail.html) */
@@ -990,35 +890,3 @@ button:hover, .btn:hover {
         font-size: 0.9rem;
     }
 }
-=======
-@media (max-width: 480px) {
-  .hero-content {
-    padding: 1rem;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-
-  .btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.8rem;
-  }
-}
-
-/* Header scroll effect */
-.main-header.scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Loading animations */
-.course-card:nth-child(1) { animation-delay: 0.1s; }
-.course-card:nth-child(2) { animation-delay: 0.2s; }
-.course-card:nth-child(3) { animation-delay: 0.3s; }
-.course-card:nth-child(4) { animation-delay: 0.4s; }
->>>>>>> 4530e60224a40d5d5d4e9077298c102dcb469412
