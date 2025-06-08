@@ -58,6 +58,7 @@ function CourseCard ({ titulo, imgName, descripcion, id }) {
                 <FormularioCompra
                     onClose={handleCloseModal}
                     courseTitle={titulo}
+                    courseId={id}
                 />
             )}
         </>

@@ -8,9 +8,12 @@ from model.bd import MYSQL_CONNECTOR #Clase realizar peticiones y conectarse a b
 from model.usuarios import Usuario as User_obj #Clase para cada movimiento del usuario
 from model.estudiante import Estudiante as Studen_obj #Clase para cada movimiento del estudiante
 from model.service import Services as Service_obj #Clase para cada movimiento de "servicio" como iniciar sesion
+from model.cursos import CursoService #Clase que nos permite acceder a la base de datos con movimientos para los cursos
 #Tipos para las rutas
 from tipos.usuario import *
 from tipos.login_info import *
+from tipos.cursos import *
+import json
 #Librerias para leer archivos internos
 import os
 from dotenv import load_dotenv
@@ -74,10 +77,28 @@ async def login(data: LoginInfo, response: Response):
             # Inicializamos los datos que esperamos que tenga nuestra sesión
             session_token = {"userId": login_response["result"]["user_id"], "tipo": login_response["result"]["tipo_usuario"]}
             # Creamos y configuramos la sesión del usuario con los datos que recibimos
-            response.set_cookie(key="session", value= session_token, httponly=True)
+            response.set_cookie(key="session", value= json.dumps(session_token), httponly=True, secure= False, domain="localhost", path="/")
             print("Se creo la cookie")
         # Retornamos la respuesta del servidor
         return login_response
+    # Captura el error que sea por HTTP y nos tira el error
+    except HTTPException as e:
+        raise e
+    # Ante cualquier error imprimimos el error en consola y tiramos una excepcion HTTP y retornamos un estatus 500 
+    except Exception as e:
+        print("Ha ocurrido un error: ", e)
+        raise HTTPException(status_code=500, detail="Ha ocurrido un error")
+@app.post("/comprar-certificado")
+async def buyCertificate(data: ComprarCurso, request:Request):
+    try:
+        session = request.cookies.get("session")
+        print("La session es : ", session)
+        if not session: return { "estatus": -1, "result": { "message": "Debes iniciar sesión"}}
+        userId = json.loads(session)["userId"]
+        service: CursoService = CursoService(user, password, host, db)
+        result = service.buy_course(userId, data.curso_id)
+        print(result)
+        return result
     # Captura el error que sea por HTTP y nos tira el error
     except HTTPException as e:
         raise e

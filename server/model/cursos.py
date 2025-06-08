@@ -67,6 +67,31 @@ class CursoService(MYSQL_CONNECTOR):
             "message": "Se han traido los cursos que se tienen en base de datos",
             "cursos": list_cursos
         }}
+    # Metodo para saber si el usuario tiene o no el curso comprado
+    def has_course(self, user_id, course_id) -> bool:
+        # Creamos nuestra consulta para verificar si el usuario ya tiene o no comprado dicho curso
+        consulta = f"select * from curso_estudiante where estudiante = %s and curso = %s;"
+        # Llamamos la metodo para realizar la consulta
+        cursos = super().select_queries(consulta, user_id, course_id)
+        # Retornamos True o False dependiendo
+        return len(cursos) > 0
+    
+    # Metodo para comprar la certificación de un curso
+    def buy_course(self, user_id, course_id):
+        # En caso de que el metodo anterior de True indica que ese curso ya lo tenemos
+        if self.has_course(user_id, course_id): return {"estatus": 0, "result": {
+            "message": "El curso ya lo has comprado"
+                }
+            }
+        # Realizamos la consulta que insertara los datos a la bd
+        consulta = "insert into curso_estudiante (estudiante, curso, certificado, estatus) values (%s, %s, %s, %s)"
+        # Llamamos al metodo correspondiente y le pasamos los datos necesarios
+        super().other_queries(consulta, user_id, course_id, 1, 1)
+        # Retornamos un estatus de 1 dando a entender que todo estabien 
+        return {"estatus": 1, "result": {
+            "message": "El certificado se ha comprado"
+        }}
+        
 # Pruebas realizadas para verificar el funcionamiento correcto de la clase recien creada
 if __name__ == "__main__":
     import os

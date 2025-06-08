@@ -5,7 +5,7 @@ import "../styles/auth.css"; // Estilos del formulario modal de compra
 // Recibe como props:
 // - onClose: función para cerrar el modal.
 // - courseTitle: nombre del curso que se está comprando.
-function FormularioCompra({ onClose, courseTitle }) {
+function FormularioCompra({ onClose, courseTitle, courseId }) {
   // Estados para los campos del formulario
   const [tarjeta, setTarjeta] = useState("");
   const [vencimiento, setVencimiento] = useState("");
@@ -46,12 +46,29 @@ function FormularioCompra({ onClose, courseTitle }) {
   };
 
   // Al enviar el formulario, muestra los datos por consola (simula una compra)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Tarjeta:", tarjeta);
     console.log("Vencimiento:", vencimiento);
     console.log("CVV:", cvv);
     // Aquí iría el procesamiento del pago real
+    const peticion = await fetch("http://localhost:8000/comprar-certificado", { method: "POST", headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ curso_id: courseId })
+    });
+    const resultado = await peticion.json();
+    console.log(resultado);
+    if(resultado.estatus == 1) {
+      onClose();
+      return alert("Certificado comprado");
+    }
+    else if(resultado.estatus == 0){
+      onClose();
+      return alert("El curso ya lo has comprado")
+    }
+    else{
+      onClose();
+      return alert("Favor de iniciar sesion")
+    }
   };
 
   return (
